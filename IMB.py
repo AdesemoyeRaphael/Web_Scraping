@@ -1,5 +1,4 @@
 import scrapy
-# from scrapy.crawler import CrawlerProcess
 import pandas as pd
 import numpy as np
 import re
@@ -11,36 +10,19 @@ class imb(scrapy.Spider):
 	start_urls = ['https://www.accaglobal.com/uk/en/member/find-an-accountant/find-firm/results.html?isocountry=GB&location=London&country=UK&firmname=&organisationid=ACCA&pagenumber=1&resultsperpage=25&requestcount=1&hid=']
 	x = 1
 
-	# data = []
 
 	def parse(self,response):
 
 		company = response.css(".detailsLink::attr(href)").extract()
 
 		yield {'Company':company}
-	
-# 		yield response.follow(next_page, callback=self.parse)
-# process = CrawlerProcess({
-# 	'DOWNLOADER_MIDDLEWARES': {
-#    'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
-#    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,}
-
-# 	})
-
-# process.crawl(imb)
-# process.start()
-
-# data = pd.read_csv("movies.csv")
-# print(data)
-
 
 
 
 data = pd.read_csv('firmlinks.csv')
 for x in data['Company']:
 	y = x.split(",")
-	# com.append(y)
-# print(y)
+
 l=len(y)
 
 
@@ -52,7 +34,6 @@ class imb(scrapy.Spider):
 	start_urls = ['https://www.accaglobal.com/uk/en/member/find-an-accountant/find-firm/results/details.html?isocountry=GB&location=London&country=UK&firmname=&organisationid=ACCA&pagenumber=1&resultsperpage=25&requestcount=1&hid=&advisorid=2841946']
 	x = 1
 
-	# data = []
 
 	def parse(self,response):
 		try:
